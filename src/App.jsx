@@ -6,11 +6,13 @@ import Projects from "./components/Projects";
 import Footer from "./components/Footer";
 import CodeScreen from "./components/CodeScreen";
 import CircuitPattern from "./components/CircuitPattern";
+import Particles from "./components/Particles";
 import ScrollReveal from "./components/ScrollReveal";
 
 function App() {
   return (
     <div>
+      <Particles />
       <CircuitPattern />
       <Navbar />
       <Hero />

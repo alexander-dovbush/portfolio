@@ -7,8 +7,8 @@
 }
 
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
+  --bg-primary: #0e0e12;
+  --bg-secondary: #141418;
   --bg-card: #161616;
   --text-primary: #e0e0e0;
   --text-secondary: #888888;
@@ -28,6 +28,11 @@ body {
   color: var(--text-primary);
   font-family: var(--font-heading);
   line-height: 1.6;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 a {

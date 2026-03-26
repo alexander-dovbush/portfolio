@@ -1,22 +1,12 @@
 @media (max-width: 768px) {
-  .navbar {
-    padding: 0.8rem 1.2rem;
-  }
-
-  .navbar-links {
-    gap: 1rem;
-  }
-
-  .navbar-links a {
-    font-size: 0.8rem;
-  }
-
   .hero {
     padding: 5rem 1.5rem 3rem;
+    min-height: 80vh;
   }
 
   .hero-name {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
+    word-break: break-word;
   }
 
   .hero-title {
@@ -24,7 +14,7 @@
   }
 
   .hero-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
   .hero-buttons {
@@ -34,38 +24,113 @@
 
   .btn {
     text-align: center;
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
   }
 
   .about,
   .skills,
   .projects {
-    padding: 4rem 1.5rem;
+    padding: 3.5rem 1.5rem;
   }
 
   .section-title {
     font-size: 1.5rem;
   }
 
+  .about-content p {
+    font-size: 0.95rem;
+  }
+
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .skill-card {
+    padding: 1rem;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
   }
 
   .projects-grid {
     grid-template-columns: 1fr;
   }
+
+  .project-card {
+    padding: 1.2rem;
+  }
+
+  .footer {
+    padding: 2rem 1.5rem;
+  }
+
+  .codescreen-wrapper {
+    display: none;
+  }
+
+  .circuit-wrapper {
+    width: 30px;
+    opacity: 0.1;
+  }
 }
 
 @media (max-width: 480px) {
+  .hero {
+    padding: 4.5rem 1.2rem 2.5rem;
+  }
+
   .hero-name {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
+  }
+
+  .hero-title {
+    font-size: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .hero-greeting {
+    font-size: 0.9rem;
+  }
+
+  .about,
+  .skills,
+  .projects {
+    padding: 3rem 1.2rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .about-content p {
+    font-size: 0.9rem;
   }
 
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
+    gap: 0.6rem;
   }
 
-  .navbar-links {
-    gap: 0.8rem;
+  .skill-card {
+    padding: 0.8rem;
+  }
+
+  .skill-name {
+    font-size: 0.85rem;
+  }
+
+  .skill-label {
+    font-size: 0.65rem;
+  }
+
+  .circuit-wrapper {
+    display: none;
   }
 }
