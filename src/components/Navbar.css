@@ -44,10 +44,12 @@
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem 1.2rem;
+    gap: 1.5rem;
   }
 
   .navbar-logo {
     position: static;
+    margin-right: auto;
   }
 
   .navbar-links {
