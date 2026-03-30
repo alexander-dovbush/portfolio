@@ -8,6 +8,7 @@ import CodeScreen from "./components/CodeScreen";
 import CircuitPattern from "./components/CircuitPattern";
 import Particles from "./components/Particles";
 import ScrollReveal from "./components/ScrollReveal";
+import BackToTop from "./components/BackToTop";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Projects />
       </ScrollReveal>
       <Footer />
+      <BackToTop />
       <CodeScreen />
     </div>
   );
