@@ -18,20 +18,12 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  transition:
-    border-color 0.3s ease,
-    transform 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .project-card:hover {
   border-color: var(--accent);
   transform: translateY(-4px);
-}
-
-a.project-card {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
 }
 
 .project-header {
@@ -46,13 +38,13 @@ a.project-card {
   font-size: 1.2rem;
 }
 
-.project-link-icon {
+.project-header a {
   color: var(--text-secondary);
   font-size: 1.1rem;
   transition: color 0.3s ease;
 }
 
-.project-card:hover .project-link-icon {
+.project-header a:hover {
   color: var(--accent);
 }
 
