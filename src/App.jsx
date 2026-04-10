@@ -1,14 +1,14 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Footer from "./components/Footer";
-import CodeScreen from "./components/CodeScreen";
-import CircuitPattern from "./components/CircuitPattern";
-import Particles from "./components/Particles";
-import ScrollReveal from "./components/ScrollReveal";
-import BackToTop from "./components/BackToTop";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import Hero from "./components/sections/Hero";
+import About from "./components/sections/About";
+import Skills from "./components/sections/Skills";
+import Projects from "./components/sections/Projects";
+import Particles from "./components/effects/Particles";
+import CircuitPattern from "./components/effects/CircuitPattern";
+import CodeScreen from "./components/effects/CodeScreen";
+import ScrollReveal from "./components/ui/ScrollReveal";
+import BackToTop from "./components/ui/BackToTop";
 
 function App() {
   return (
