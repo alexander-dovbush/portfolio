@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import "./Hero.css";
 
-function Hero() {
-  // Array of titles to cycle through
-  const titles = [
-    "Software Engineering Student",
-    "Full-Stack Developer",
-    "Problem Solver",
-  ];
+// Array of titles to cycle through
+const TITLES = [
+  "Software Engineering Student",
+  "Full-Stack Developer",
+  "Problem Solver",
+];
 
+function Hero() {
   const [titleIndex, setTitleIndex] = useState(0); // which title we're on
   const [displayText, setDisplayText] = useState(""); // the visible text so far
   const [isDeleting, setIsDeleting] = useState(false); // are we typing or deleting?
 
   useEffect(() => {
-    const currentTitle = titles[titleIndex];
+    const currentTitle = TITLES[titleIndex];
+    let pauseTimeout;
 
     const timeout = setTimeout(
       () => {
@@ -24,7 +25,7 @@ function Hero() {
 
           // If we finished typing the full title, pause then start deleting
           if (displayText.length === currentTitle.length) {
-            setTimeout(() => setIsDeleting(true), 1500); // pause 1.5s before deleting
+            pauseTimeout = setTimeout(() => setIsDeleting(true), 1500); // pause 1.5s before deleting
             return;
           }
         } else {
@@ -34,14 +35,17 @@ function Hero() {
           // If we deleted everything, move to the next title
           if (displayText.length === 0) {
             setIsDeleting(false);
-            setTitleIndex((prev) => (prev + 1) % titles.length); // loop back to 0
+            setTitleIndex((prev) => (prev + 1) % TITLES.length); // loop back to 0
           }
         }
       },
       isDeleting ? 50 : 100,
     ); // deleting is faster than typing
 
-    return () => clearTimeout(timeout); // cleanup on re-render
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(pauseTimeout);
+    };
   }, [displayText, isDeleting, titleIndex]);
 
   return (

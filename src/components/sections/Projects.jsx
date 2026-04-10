@@ -3,6 +3,7 @@ import "./Projects.css";
 function Projects() {
   const projects = [
     {
+      id: "file-organizer",
       title: "File Organizer",
       description:
         "A CLI tool that automatically sorts files into categorized folders. Features watch mode for real-time organizing, full undo support, and detailed logging.",
@@ -10,12 +11,14 @@ function Projects() {
       link: "https://github.com/alexander-dovbush/file-organizer",
     },
     {
+      id: "coming-soon-java",
       title: "Coming Soon",
       description: "Something interesting is brewing. Check back later.",
       tags: ["Java", "SQL"],
       link: null,
     },
     {
+      id: "coming-soon-python",
       title: "Coming Soon",
       description: "More projects on the way as I keep building.",
       tags: ["Python"],
@@ -27,14 +30,14 @@ function Projects() {
     <section id="projects" className="projects">
       <h2 className="section-title">Projects</h2>
       <div className="projects-grid">
-        {projects.map((project, index) => {
+        {projects.map((project) => {
           const CardWrapper = project.link ? "a" : "div";
           const cardProps = project.link
             ? { href: project.link, target: "_blank", rel: "noreferrer" }
             : {};
 
           return (
-            <CardWrapper key={index} className="project-card" {...cardProps}>
+            <CardWrapper key={project.id} className="project-card" {...cardProps}>
               <div className="project-header">
                 <span className="project-icon">&#x2F;&#x2F;</span>
                 {project.link && <span className="project-link-icon">↗</span>}

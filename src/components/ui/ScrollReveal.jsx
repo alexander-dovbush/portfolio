@@ -6,16 +6,18 @@ function ScrollReveal({ children }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const node = ref.current;
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      ([entry], obs) => {
         if (entry.isIntersecting) {
           setVisible(true);
+          obs.disconnect();
         }
       },
       { threshold: 0.15 },
     );
 
-    if (ref.current) observer.observe(ref.current);
+    if (node) observer.observe(node);
 
     return () => observer.disconnect();
   }, []);

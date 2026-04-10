@@ -11,10 +11,12 @@ function CodeScreen() {
       <div className="codescreen">
         <div className="codescreen-topbar">
           <div className="codescreen-dots">
-            <span
+            <button
+              type="button"
               className="dot dot-red"
               onClick={() => setVisible(false)}
-            ></span>
+              aria-label="Close code preview"
+            ></button>
             <span className="dot dot-yellow"></span>
             <span className="dot dot-green"></span>
           </div>

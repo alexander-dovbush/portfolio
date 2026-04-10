@@ -69,6 +69,17 @@ function Skills() {
         </div>
 
         <div className="tech-group">
+          <h3 className="tech-group-title">Hardware</h3>
+          <div className="tech-tags">
+            {hardware.map((hw) => (
+              <span key={hw} className="tech-tag">
+                {hw}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="tech-group">
           <h3 className="tech-group-title">Networking</h3>
           <div className="tech-tags">
             {networking.map((net) => (

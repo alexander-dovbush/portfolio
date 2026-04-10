@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
 
+const SECTIONS = ["about", "skills", "projects"];
+
 function Navbar() {
-  const sections = ["about", "skills", "projects"];
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -17,7 +18,7 @@ function Navbar() {
       { threshold: 0.3 }, // triggers when 30% of the section is visible
     );
 
-    sections.forEach((id) => {
+    SECTIONS.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
     });
@@ -31,7 +32,7 @@ function Navbar() {
         AD
       </a>
       <ul className="navbar-links">
-        {sections.map((section) => (
+        {SECTIONS.map((section) => (
           <li key={section}>
             <a
               href={`#${section}`}
