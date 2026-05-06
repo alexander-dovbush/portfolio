@@ -1,0 +1,100 @@
+.constellation-clock {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(8, 10, 18, 0.55);
+  border: 1px solid rgba(79, 195, 247, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  z-index: 90;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  animation: cc-fade-in 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes cc-fade-in {
+  to { opacity: 1; }
+}
+
+.cc-digit {
+  width: 20px;
+  height: 34px;
+  overflow: visible;
+}
+
+.cc-colon {
+  width: 6px;
+  height: 34px;
+  overflow: visible;
+}
+
+.cc-line {
+  stroke: #4fc3f7;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+
+.cc-line.on {
+  opacity: 0.85;
+  filter: drop-shadow(0 0 2.5px rgba(79, 195, 247, 0.75));
+}
+
+.cc-star {
+  fill: rgba(180, 200, 255, 0.28);
+  transition:
+    fill 0.55s ease,
+    opacity 0.55s ease,
+    filter 0.55s ease;
+}
+
+.cc-star.lit {
+  fill: rgba(255, 252, 240, 1);
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(79, 195, 247, 0.9));
+}
+
+.cc-star.pulse {
+  animation: cc-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cc-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .constellation-clock {
+    bottom: 1rem;
+    left: 1rem;
+    padding: 8px 10px;
+    gap: 4px;
+  }
+  .cc-digit { width: 16px; height: 28px; }
+  .cc-colon { width: 5px; height: 28px; }
+}
+
+@media (max-width: 480px) {
+  .constellation-clock {
+    padding: 6px 8px;
+    gap: 3px;
+  }
+  .cc-digit { width: 13px; height: 22px; }
+  .cc-colon { width: 4px; height: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .constellation-clock { animation: none; opacity: 1; }
+  .cc-line, .cc-star { transition: none; }
+  .cc-star.pulse { animation: none; opacity: 0.85; }
+}

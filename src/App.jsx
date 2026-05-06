@@ -7,6 +7,7 @@ import Projects from "./components/sections/Projects";
 import Particles from "./components/effects/Particles";
 import CircuitPattern from "./components/effects/CircuitPattern";
 import CodeScreen from "./components/effects/CodeScreen";
+import ConstellationClock from "./components/effects/ConstellationClock";
 import ScrollReveal from "./components/ui/ScrollReveal";
 import BackToTop from "./components/ui/BackToTop";
 
@@ -29,6 +30,7 @@ function App() {
       <Footer />
       <BackToTop />
       <CodeScreen />
+      <ConstellationClock />
     </div>
   );
 }
