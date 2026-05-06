@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import "./ConstellationClock.css";
 
+// Wall-clock time of the very first commit on this repo. The clock counts
+// up from this moment, so it reads "how long this portfolio has been live."
+const SHIPPED_AT = new Date("2026-03-26T11:39:07+02:00").getTime();
+
 // Six "endpoint" stars per digit, laid out as the corners + mid-row of a
 // 7-segment display. Lines between them form the digit shape — the result
 // reads like a tiny constellation rather than an LCD.
@@ -78,18 +82,32 @@ function Colon() {
   );
 }
 
+function computeElapsed(now) {
+  const totalMs = Math.max(0, now - SHIPPED_AT);
+  const totalSec = Math.floor(totalMs / 1000);
+  const days = Math.floor(totalSec / 86400);
+  const hours = Math.floor((totalSec % 86400) / 3600);
+  const minutes = Math.floor((totalSec % 3600) / 60);
+  const seconds = totalSec % 60;
+  return { days, hours, minutes, seconds };
+}
+
+// Pad to 2 digits unless we've crossed 100 days, then grow to 3.
+function padDays(d) {
+  return d < 100 ? String(d).padStart(2, "0") : String(d);
+}
+
 function ConstellationClock() {
-  const [time, setTime] = useState(() => new Date());
+  const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    // Align the first tick to the next wall-clock second so seconds advance
-    // in sync with real time, then a steady 1s interval after that.
-    const now = Date.now();
-    const msToNextSecond = 1000 - (now % 1000);
+    // Align the first tick to the next wall-clock second so subsequent ticks
+    // fall on the second boundary — keeps the seconds digit honest.
+    const msToNextSecond = 1000 - (Date.now() % 1000);
     let intervalId;
     const initialId = setTimeout(() => {
-      setTime(new Date());
-      intervalId = setInterval(() => setTime(new Date()), 1000);
+      setNow(Date.now());
+      intervalId = setInterval(() => setNow(Date.now()), 1000);
     }, msToNextSecond);
 
     return () => {
@@ -98,24 +116,41 @@ function ConstellationClock() {
     };
   }, []);
 
-  const hh = String(time.getHours()).padStart(2, "0");
-  const mm = String(time.getMinutes()).padStart(2, "0");
-  const ss = String(time.getSeconds()).padStart(2, "0");
+  const { days, hours, minutes, seconds } = computeElapsed(now);
+  const dd = padDays(days);
+  const hh = String(hours).padStart(2, "0");
+  const mm = String(minutes).padStart(2, "0");
+  const ss = String(seconds).padStart(2, "0");
 
   return (
     <div
       className="constellation-clock"
       role="img"
-      aria-label={`Current time ${hh}:${mm}:${ss}`}
+      aria-label={`Portfolio uptime: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`}
     >
-      <Digit value={hh[0]} />
-      <Digit value={hh[1]} />
-      <Colon />
-      <Digit value={mm[0]} />
-      <Digit value={mm[1]} />
-      <Colon />
-      <Digit value={ss[0]} />
-      <Digit value={ss[1]} />
+      <div className="cc-label">
+        <span className="cc-comment">{"//"}</span>{" "}
+        <span className="cc-prop">portfolio</span>
+        <span className="cc-punct">.</span>
+        <span className="cc-prop">uptime</span>
+      </div>
+      <div className="cc-row">
+        {dd.split("").map((d, i) => (
+          <Digit key={`d${i}`} value={d} />
+        ))}
+        <Colon />
+        <Digit value={hh[0]} />
+        <Digit value={hh[1]} />
+        <Colon />
+        <Digit value={mm[0]} />
+        <Digit value={mm[1]} />
+        <Colon />
+        <Digit value={ss[0]} />
+        <Digit value={ss[1]} />
+      </div>
+      <div className="cc-caption" aria-hidden="true">
+        <span className="cc-prompt">{">"}</span> shipped {days}d ago
+      </div>
     </div>
   );
 }

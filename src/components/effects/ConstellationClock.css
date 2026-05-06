@@ -3,55 +3,99 @@
   bottom: 1.5rem;
   left: 1.5rem;
   display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 10px 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 12px 14px 10px;
   border-radius: 10px;
-  background: rgba(8, 10, 18, 0.55);
-  border: 1px solid rgba(79, 195, 247, 0.18);
+  background: rgba(8, 10, 18, 0.62);
+  border: 1px solid rgba(255, 184, 107, 0.22);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow:
-    0 6px 24px rgba(0, 0, 0, 0.35),
+    0 6px 24px rgba(0, 0, 0, 0.4),
     inset 0 0 0 1px rgba(255, 255, 255, 0.02);
   z-index: 90;
   pointer-events: none;
   user-select: none;
   opacity: 0;
   animation: cc-fade-in 1.2s ease-out 0.6s forwards;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
 }
 
 @keyframes cc-fade-in {
   to { opacity: 1; }
 }
 
+/* Code-styled label above the constellation digits */
+.cc-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.cc-comment {
+  color: rgba(140, 150, 170, 0.75);
+}
+
+.cc-prop {
+  color: rgba(255, 200, 120, 0.95);
+}
+
+.cc-punct {
+  color: rgba(140, 150, 170, 0.75);
+}
+
+/* Caption under the clock — small "> shipped Xd ago" prompt line */
+.cc-caption {
+  font-size: 0.65rem;
+  letter-spacing: 0.3px;
+  color: rgba(180, 190, 210, 0.55);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.cc-prompt {
+  color: rgba(255, 184, 107, 0.85);
+  margin-right: 3px;
+}
+
+.cc-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .cc-digit {
-  width: 20px;
-  height: 34px;
+  width: 18px;
+  height: 30px;
   overflow: visible;
 }
 
 .cc-colon {
   width: 6px;
-  height: 34px;
+  height: 30px;
   overflow: visible;
 }
 
+/* Warm amber lines — much higher contrast than the previous dim cyan */
 .cc-line {
-  stroke: #4fc3f7;
-  stroke-width: 1.4;
+  stroke: #ffb86b;
+  stroke-width: 1.5;
   stroke-linecap: round;
   opacity: 0;
   transition: opacity 0.55s ease;
 }
 
 .cc-line.on {
-  opacity: 0.85;
-  filter: drop-shadow(0 0 2.5px rgba(79, 195, 247, 0.75));
+  opacity: 0.95;
+  filter: drop-shadow(0 0 3px rgba(255, 184, 107, 0.85));
 }
 
+/* Background stars: faint warm white. Lit stars: bright cream-gold. */
 .cc-star {
-  fill: rgba(180, 200, 255, 0.28);
+  fill: rgba(220, 210, 195, 0.35);
   transition:
     fill 0.55s ease,
     opacity 0.55s ease,
@@ -59,9 +103,9 @@
 }
 
 .cc-star.lit {
-  fill: rgba(255, 252, 240, 1);
+  fill: #fff5d4;
   opacity: 1;
-  filter: drop-shadow(0 0 4px rgba(79, 195, 247, 0.9));
+  filter: drop-shadow(0 0 5px rgba(255, 200, 120, 0.95));
 }
 
 .cc-star.pulse {
@@ -69,7 +113,7 @@
 }
 
 @keyframes cc-pulse {
-  0%, 100% { opacity: 0.45; }
+  0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
 }
 
@@ -77,20 +121,25 @@
   .constellation-clock {
     bottom: 1rem;
     left: 1rem;
-    padding: 8px 10px;
-    gap: 4px;
+    padding: 9px 11px 7px;
+    gap: 5px;
   }
-  .cc-digit { width: 16px; height: 28px; }
-  .cc-colon { width: 5px; height: 28px; }
+  .cc-label { font-size: 0.62rem; }
+  .cc-caption { font-size: 0.58rem; }
+  .cc-digit { width: 14px; height: 24px; }
+  .cc-colon { width: 5px; height: 24px; }
+  .cc-row { gap: 3px; }
 }
 
 @media (max-width: 480px) {
   .constellation-clock {
-    padding: 6px 8px;
-    gap: 3px;
+    padding: 7px 9px 6px;
+    gap: 4px;
   }
-  .cc-digit { width: 13px; height: 22px; }
-  .cc-colon { width: 4px; height: 22px; }
+  .cc-label { font-size: 0.58rem; }
+  .cc-caption { font-size: 0.55rem; }
+  .cc-digit { width: 11px; height: 19px; }
+  .cc-colon { width: 4px; height: 19px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
