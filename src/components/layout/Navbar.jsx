@@ -7,15 +7,27 @@ function Navbar() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
+    // Track current ratio for every section so we can always pick the most-visible one.
+    // Without this, two sections crossing the threshold in the same tick would let
+    // the *last* one fire win arbitrarily, causing the highlight to flicker.
+    const ratios = new Map(SECTIONS.map((id) => [id, 0]));
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+        for (const entry of entries) {
+          ratios.set(entry.target.id, entry.intersectionRatio);
+        }
+        let topId = "";
+        let topRatio = 0;
+        for (const [id, ratio] of ratios) {
+          if (ratio > topRatio) {
+            topRatio = ratio;
+            topId = id;
           }
-        });
+        }
+        if (topRatio > 0) setActiveSection(topId);
       },
-      { threshold: 0.3 }, // triggers when 30% of the section is visible
+      { threshold: [0, 0.25, 0.5, 0.75, 1] },
     );
 
     SECTIONS.forEach((id) => {
@@ -23,7 +35,7 @@ function Navbar() {
       if (element) observer.observe(element);
     });
 
-    return () => observer.disconnect(); // cleanup
+    return () => observer.disconnect();
   }, []);
 
   return (
