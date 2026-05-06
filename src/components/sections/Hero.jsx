@@ -9,43 +9,34 @@ const TITLES = [
 ];
 
 function Hero() {
-  const [titleIndex, setTitleIndex] = useState(0); // which title we're on
-  const [displayText, setDisplayText] = useState(""); // the visible text so far
-  const [isDeleting, setIsDeleting] = useState(false); // are we typing or deleting?
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const currentTitle = TITLES[titleIndex];
-    let pauseTimeout;
 
-    const timeout = setTimeout(
+    if (!isDeleting && displayText === currentTitle) {
+      const t = setTimeout(() => setIsDeleting(true), 1500);
+      return () => clearTimeout(t);
+    }
+    if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setTitleIndex((i) => (i + 1) % TITLES.length);
+      return;
+    }
+
+    const t = setTimeout(
       () => {
-        if (!isDeleting) {
-          // Typing: add one character
-          setDisplayText(currentTitle.substring(0, displayText.length + 1));
-
-          // If we finished typing the full title, pause then start deleting
-          if (displayText.length === currentTitle.length) {
-            pauseTimeout = setTimeout(() => setIsDeleting(true), 1500); // pause 1.5s before deleting
-            return;
-          }
-        } else {
-          // Deleting: remove one character
-          setDisplayText(currentTitle.substring(0, displayText.length - 1));
-
-          // If we deleted everything, move to the next title
-          if (displayText.length === 0) {
-            setIsDeleting(false);
-            setTitleIndex((prev) => (prev + 1) % TITLES.length); // loop back to 0
-          }
-        }
+        setDisplayText(
+          isDeleting
+            ? currentTitle.substring(0, displayText.length - 1)
+            : currentTitle.substring(0, displayText.length + 1),
+        );
       },
       isDeleting ? 50 : 100,
-    ); // deleting is faster than typing
-
-    return () => {
-      clearTimeout(timeout);
-      clearTimeout(pauseTimeout);
-    };
+    );
+    return () => clearTimeout(t);
   }, [displayText, isDeleting, titleIndex]);
 
   return (
