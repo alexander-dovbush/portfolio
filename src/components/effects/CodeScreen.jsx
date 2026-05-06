@@ -1,8 +1,26 @@
 import { useState } from "react";
 import "./CodeScreen.css";
 
+const DISMISS_KEY = "codescreen-dismissed";
+
 function CodeScreen() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(() => {
+    try {
+      return localStorage.getItem(DISMISS_KEY) !== "1";
+    } catch {
+      return true;
+    }
+  });
+
+  const dismiss = () => {
+    setVisible(false);
+    try {
+      localStorage.setItem(DISMISS_KEY, "1");
+    } catch {
+      // localStorage may be unavailable (private mode, quota); the in-memory
+      // state still hides it for this session.
+    }
+  };
 
   if (!visible) return null;
 
@@ -14,7 +32,7 @@ function CodeScreen() {
             <button
               type="button"
               className="dot dot-red"
-              onClick={() => setVisible(false)}
+              onClick={dismiss}
               aria-label="Close code preview"
             ></button>
             <span className="dot dot-yellow"></span>
