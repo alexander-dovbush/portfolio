@@ -5,6 +5,9 @@ function BackToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // Throttle scroll handling to one update per frame — scroll events fire
+    // dozens of times per second on most devices, and we only need to
+    // re-check whether the button should be visible once per paint.
     let ticking = false;
     const handleScroll = () => {
       if (ticking) return;

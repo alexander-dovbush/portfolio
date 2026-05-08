@@ -8,6 +8,8 @@ import Particles from "./components/effects/Particles";
 import CircuitPattern from "./components/effects/CircuitPattern";
 import CodeScreen from "./components/effects/CodeScreen";
 import ConstellationClock from "./components/effects/ConstellationClock";
+import ZodiacConstellation from "./components/effects/ZodiacConstellation";
+import TimeConstellation from "./components/effects/TimeConstellation";
 import ScrollReveal from "./components/ui/ScrollReveal";
 import BackToTop from "./components/ui/BackToTop";
 
@@ -15,6 +17,8 @@ function App() {
   return (
     <div>
       <Particles />
+      <ZodiacConstellation />
+      <TimeConstellation />
       <CircuitPattern />
       <Navbar />
       <Hero />

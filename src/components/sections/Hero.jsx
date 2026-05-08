@@ -21,9 +21,14 @@ function Hero() {
       return () => clearTimeout(t);
     }
     if (isDeleting && displayText === "") {
-      setIsDeleting(false);
-      setTitleIndex((i) => (i + 1) % TITLES.length);
-      return;
+      // Brief pause before the next title starts typing — feels like a
+      // breath rather than an instant snap to the next word. Deferring via
+      // setTimeout also keeps the state transitions out of the effect body.
+      const t = setTimeout(() => {
+        setIsDeleting(false);
+        setTitleIndex((i) => (i + 1) % TITLES.length);
+      }, 220);
+      return () => clearTimeout(t);
     }
 
     const t = setTimeout(

@@ -31,6 +31,9 @@ function Projects() {
       <h2 className="section-title">Projects</h2>
       <div className="projects-grid">
         {projects.map((project) => {
+          // Render as an anchor if the project has a link, otherwise a div —
+          // avoids creating a clickable card that goes nowhere for the
+          // "Coming Soon" placeholders.
           const CardWrapper = project.link ? "a" : "div";
           const cardProps = project.link
             ? { href: project.link, target: "_blank", rel: "noreferrer" }

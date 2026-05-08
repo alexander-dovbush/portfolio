@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import "./ScrollReveal.css";
 
+// Wraps a section so it fades in the first time it scrolls into view.
+// Once revealed it stays revealed — we disconnect the observer so re-
+// scrolling past doesn't replay the animation.
 function ScrollReveal({ children }) {
   const ref = useRef();
   const [visible, setVisible] = useState(false);
@@ -14,6 +17,8 @@ function ScrollReveal({ children }) {
           obs.disconnect();
         }
       },
+      // 15% threshold — section starts revealing as soon as a sliver of it
+      // is visible, instead of waiting until it's fully on screen.
       { threshold: 0.15 },
     );
 
